@@ -1,0 +1,17 @@
+# Arquivos e pastas do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos de Build
+bin/
+obj/
+build/
+
+# Arquivos gerados automaticamente
+*.log
+*.tlog
+*.cache
+*.csproj.user

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Vencedor da Partida";
+}
+
+<h1>Vencedor!</h1>
+
+@if (TempData["Vencedor"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Parabéns!</strong> O vencedor é: <span>@TempData["Vencedor"]</span>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        Nenhum vencedor foi definido ainda.
+    </div>
+}
+
+<a asp-action="Index" class="btn btn-primary">Voltar para a Partida</a>

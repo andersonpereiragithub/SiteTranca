@@ -11,7 +11,9 @@
 
         public void AdicionarJogador(string nome)
         {
+
             _partida.Jogadores.Add(new Jogador(nome));
+
         }
 
         public void RegistrarPontuacao(int rodada, string nomeJogador, int pontosCanastras, int pontosCartas)
@@ -35,5 +37,4 @@
             return _partida.VerificarVencedor(out vencedor);
         }
     }
-
 }

@@ -11,11 +11,24 @@ namespace MarcadorDeTranca.Controllers
 
         public IActionResult Index()
         {
-            if (_partida.Jogadores == null) 
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarJogadores(string[] jogadores)
+        {
+            // Processar os jogadores cadastrados e redirecionar para a próxima etapa
+            if (jogadores.Length == 2)
             {
-                _partida.Jogadores = new List<Jogador>();
+                ViewBag.Modo = "1x1";
             }
-            return View(_partida);
+            else if (jogadores.Length == 4)
+            {
+                ViewBag.Modo = "2x2";
+            }
+
+            ViewBag.Jogadores = jogadores;
+            return View("Partida"); // Crie uma view "Partida.cshtml" para exibir os dados da partida
         }
 
         [HttpPost]

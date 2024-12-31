@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Partida";
+    var jogadores = (string[])ViewBag.Jogadores;
+    var modo = ViewBag.Modo as string;
+}
+
+<h2>T R A N C A: @modo</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 16%; font-size: 12px;">Xanda</th>
+            <th style="width: 16%; font-size: 12px;">Vera</th>
+            <th style="width: 20%; font-size: 12px;">Cartas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < 11; i++)
+        {
+            <tr style="height: 24px;">
+                <!-- Altura reduzida -->
+                <!-- Linha 1: Saiu de quanto -->
+                <td>
+                    <input type="text" class="form-control saiu-input" placeholder="Saiu de quanto?" name="saiuDe_col1[]" />
+                </td>
+                <td>
+                    <input type="text" class="form-control saiu-input" placeholder="Saiu de quanto?" name="saiuDe_col2[]" />
+                </td>
+                <td rowspan="3" style="vertical-align: middle; text-align: center;">
+
+                    <input type="text" class="form-control inicial-input" placeholder="Nome do Jogador" name="iniciais_cartas[]" />
+
+                </td>
+            </tr>
+            <tr style="height: 24px;">
+                <!-- Altura reduzida -->
+                <!-- Linha 2: Quanto fez na mão -->
+                <td>
+                    <input type="number" class="form-control pontos-input" placeholder="Quanto fez na mão?" name="pontosMao_col1[]" />
+                </td>
+                <td>
+                    <input type="number" class="form-control pontos-input" placeholder="Quanto fez na mão?" name="pontosMao_col2[]" />
+                </td>
+            </tr>
+            <tr style="height: 24px;">
+                <!-- Altura reduzida -->
+                <!-- Linha 3: Soma total -->
+                <td>
+                    <input type="number" class="form-control soma-input" placeholder="Soma total" name="soma_col1[]" readonly />
+                </td>
+                <td>
+                    <input type="number" class="form-control soma-input" placeholder="Soma total" name="soma_col2[]" readonly />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('input', function (event) {
+        // Verifica se o evento foi disparado no primeiro campo da coluna "Cartas"
+        if (event.target.matches('[name="iniciais_cartas[]"]:not([readonly])')) {
+            const rows = document.querySelectorAll(`input[name="iniciais_cartas[]"]`);
+            const firstValue = event.target.value.trim();
+
+            if (firstValue) {
+                // Determina os nomes a serem alternados
+                let currentPlayer = firstValue === "Xanda" ? "Vera" : "Xanda";
+
+                // Preenche os campos abaixo alternadamente
+                rows.forEach((row, index) => {
+                    if (index > 0) {
+                        row.value = currentPlayer;
+                        currentPlayer = currentPlayer === "Xanda" ? "Vera" : "Xanda";
+                    }
+                });
+            }
+        }
+        // Verifica se o evento foi disparado por campos de soma
+        if (event.target.matches('[name^="saiuDe_"], [name^="pontosMao_"]')) {
+            const col = event.target.name.includes('col1') ? 'col1' : 'col2'; // Identifica a coluna
+            let somaTotal = 0;
+
+            const rows = document.querySelectorAll(`tr`);
+            rows.forEach(row => {
+                const saiuDeInput = row.querySelector(`input[name="saiuDe_${col}[]"]`);
+                const pontosMaoInput = row.querySelector(`input[name="pontosMao_${col}[]"]`);
+                const somaInput = row.querySelector(`input[name="soma_${col}[]"]`);
+
+                const saiuDe = parseInt(saiuDeInput?.value) || 0;
+                const pontosMao = parseInt(pontosMaoInput?.value) || 0;
+
+                somaTotal += saiuDe + pontosMao;
+
+                if (somaInput) {
+                    somaInput.value = somaTotal;
+                }
+            });
+        }
+    });
+</script>
+
+

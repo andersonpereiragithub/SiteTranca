@@ -7,3 +7,51 @@
         font-size: 12px;
     }
 }
+
+.table {
+    font-size: 10px; /* Fontes menores para celular */
+    table-layout: fixed; /* Garantir largura fixa */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #e8f5e9; /* Verde claro para cabeçalho */
+        font-weight: bold;
+        border-bottom: 2px solid #c8e6c9; /* Divisória clara */
+    }
+
+    .table td input {
+        text-align: center;
+        font-size: 10px;
+        padding: 3px; /* Reduz espaço interno */
+        border: none; /* Remove bordas dos inputs */
+        background-color: transparent; /* Fundo limpo */
+    }
+
+.saiu-input, .pontos-input {
+    border: 1px solid #a5d6a7; /* Bordas claras de verde */
+    background-color: #f1f8e9; /* Fundo verde claro */
+}
+
+.soma-input {
+    background-color: #dcedc8; /* Fundo mais destacado */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Leve sombreamento */
+}
+
+.inicial-input {
+    border: 1px solid #81c784; /* Verde um pouco mais escuro */
+    background-color: #c8e6c9; /* Fundo diferenciado */
+}
+
+.table tr {
+    height: 24px; /* Altura reduzida das linhas */
+}
+
+.table td {
+    border: none; /* Remove as bordas da tabela */
+}
